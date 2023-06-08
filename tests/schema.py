@@ -1,6 +1,7 @@
 from django.db.models import Prefetch
 import graphene
 from graphene import ConnectionField, relay
+from graphene_django.types import DjangoObjectType
 from graphene_django.fields import DjangoConnectionField
 import graphene_django_optimizer as gql_optimizer
 from graphene_django_optimizer import OptimizedDjangoObjectType
@@ -104,7 +105,7 @@ class ItemInterface(graphene.Interface):
         return getattr(root, "gql_custom_filtered_children")
 
 
-class BaseItemType(OptimizedDjangoObjectType):
+class BaseItemType(DjangoObjectType):
     title = gql_optimizer.field(
         graphene.String(),
         only="name",
